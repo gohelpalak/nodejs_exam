@@ -6,4 +6,4 @@ const UserRoutes = express.Router();
 UserRoutes.post("/register",register),
 
 
-module.exports = adminRoutes;
+module.exports = UserRoutes;

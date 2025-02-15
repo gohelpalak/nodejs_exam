@@ -13,10 +13,13 @@ const recipeSchema = mongoose.Schema({
     recipeDescription: {
         type: String,
     },
-    comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-        }]
+    author : {
+        type : String
+    },
+    // comments: [{
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Comment'
+        // }]
 },
 {
     timestamps: true
@@ -24,13 +27,13 @@ const recipeSchema = mongoose.Schema({
 
 const recipeStorage = multer.diskStorage({
     destination: (req,file,cb)=>{
-        cb(null,path.join(__dirname,"..","uploads/blog"));
+        cb(null,path.join(__dirname,"..","uploads/recipe"));
     },
     filename: (req,file,cb)=>{
         cb(null,`${file.fieldname}-${Date.now()}`);
     }
 });
 
-recipeSchema.statics.uploadImage = multer({ storage: recipeStorage }).single('recipe');
+recipeSchema.statics.uploadImage = multer({ storage: recipeStorage }).single('recipeImage');
 const recipe = mongoose.model("recipe", recipeSchema);
 module.exports = recipe;

@@ -6,25 +6,25 @@ const AdminSchema = new mongoose.Schema({
     username: String,
     email: String,
     password: String,
-    role:{
-        type : String,
-        enum : ['Admin', 'User']
+    role: {
+        type: String,
+        enum: ['Admin', 'User']
     },
-    contactNo:String,
+    contactNo: String,
     adminImage: String
-      
+
 },
-{
-    timestamps:true
-});
+    {
+        timestamps: true
+    });
 
 const userStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "..",'uploads/admin'));
+        cb(null, path.join(__dirname, "..", 'uploads/admin'));
     },
     filename: (req, file, cb) => {
-        cb(null,`${file.fieldname}-${Date.now()}`);
-        }
+        cb(null, `${file.fieldname}-${Date.now()}`);
+    }
 });
 
 AdminSchema.statics.uploadImage = multer({ storage: userStorage }).single('adminImage');
